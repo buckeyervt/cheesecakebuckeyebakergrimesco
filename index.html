@@ -724,13 +724,7 @@ async function sendNtfyNotification(customerName, readyDate, estimate) {
         await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
             method: 'POST',
             mode: 'no-cors',
-            headers: {
-                'Title': '🎂 New Cheesecake Order!',
-                'Priority': 'high',
-                'Tags': 'cake,bell',
-            },
-            body: `From: ${customerName}\nReady: ${readyDate}\nEstimate: ${estimate}\n\nCheck your email for full details.`
-        });
+            body: `🎂 New Cheesecake Order! From: ${customerName} | Ready: ${readyDate} | Est: ${estimate}`
     } catch(e) {
         // Fail silently — form still submits
         console.log('Ntfy notification failed:', e.message);
