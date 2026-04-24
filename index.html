@@ -36,39 +36,33 @@
             overflow: hidden;
         }
         .card-header {
-            background: linear-gradient(135deg, #8b1212 0%, #5a0a0a 100%);
-            padding: 2.5rem 2rem 2rem;
+            background: #ffffff;
+            padding: 2.5rem 2rem 1.5rem;
             text-align: center;
             position: relative;
-        }
-        .card-header::after {
-            content: '';
-            position: absolute;
-            bottom: -1px; left: 0; right: 0;
-            height: 24px;
-            background: #fff;
-            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            border-bottom: 1px solid #f0ece6;
         }
         .card-header img {
             width: 150px; height: 150px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid rgba(200,151,43,0.8);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
             margin-bottom: 1rem;
         }
-        .card-header h1 { color: #fff; font-size: 1.8rem; line-height: 1.2; margin: 0; }
-        .card-header h2 { color: rgba(255,255,255,0.85); font-size: 1.05rem; font-weight: 300; margin: 0.35rem 0 0; font-family: 'Lato', sans-serif; letter-spacing: 0.05em; }
+        .card-header h1 { color: var(--red); font-size: 1.9rem; line-height: 1.2; margin: 0; }
+        .card-header h2 { color: #333; font-size: 1.05rem; font-weight: 700; margin: 0.35rem 0 0; font-family: 'Lato', sans-serif; letter-spacing: 0.02em; }
         .badge {
             display: inline-block;
-            background: rgba(200,151,43,0.2);
-            border: 1px solid rgba(200,151,43,0.4);
-            color: #e8c060;
-            font-size: 0.7rem;
-            letter-spacing: 0.08em;
-            padding: 0.2rem 0.7rem;
+            background: #fff;
+            border: 1.5px solid #c8972b;
+            color: #8b6914;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 0.3rem 0.9rem;
             border-radius: 99px;
-            margin-top: 0.6rem;
+            margin-top: 0.75rem;
         }
         .card-body { padding: 2rem; }
         .section-label {
@@ -200,7 +194,7 @@
     </div>
 
     <div class="card-body">
-        <p class="text-sm text-center" style="color: var(--warm-gray); margin: 0 0 1.25rem;">
+        <p class="text-sm text-center" style="color: #666; margin: 0 0 1.25rem;">
             All prices are an <strong>estimate</strong>. Final price confirmed via email before baking begins.
         </p>
 
@@ -215,6 +209,15 @@
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="Total_Estimated_Price" id="Total_Estimated_Price" value="$0.00">
 
+            <!-- ─── SECTION 1: Order Type Instructions ─── -->
+            <div class="info-red" style="margin-bottom:1rem;">
+                <strong>Choose the type of cheesecake you'd like to order:</strong><br><br>
+                <strong>Single Flavor</strong> — a classic base flavor (Vanilla, Chocolate, or Other)<br>
+                <strong>Specialty</strong> — a signature flavor combination with a size-based surcharge<br>
+                <strong>Classic with Inclusions</strong> — a base flavor with mix-ins added in<br>
+                <span style="font-size:0.82rem; opacity:0.8; display:block; margin-top:0.5rem;">You may select more than one from any section — order as many cheesecakes as you like!</span>
+            </div>
+
             <!-- ─── SECTION 1: Prices ─── -->
             <div class="section-label">1. Single Flavor Prices</div>
             <ul class="price-table" style="list-style:none; padding:0; margin: 0 0 1.5rem;">
@@ -225,15 +228,6 @@
                 <li><span>10" x 3" <span style="color:#666;">(~16 servings)</span></span><span class="price-tag" id="display-price-10">$42</span></li>
             </ul>
             <hr class="divider">
-
-            <!-- ─── SECTION 2: Single Flavor ─── -->
-            <div class="info-red" style="margin-bottom:1rem;">
-                <strong>Order types:</strong> <br>
-                <strong>Single Flavor</strong> — Vanilla, Chocolate, or Other &nbsp;|&nbsp;
-                <strong>Specialty</strong> — signature combos with size surcharge &nbsp;|&nbsp;
-                <strong>Classic with Inclusions</strong> — base + mix-ins<br>
-                <span style="font-size:0.82rem; opacity:0.8;">You may select more than one from any section!</span>
-            </div>
 
             <div class="section-label">2. Single Flavor Cheesecake</div>
             <p class="section-sub">Select one or more flavors. Choose a size and crust type for each.</p>
