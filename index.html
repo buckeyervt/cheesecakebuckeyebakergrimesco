@@ -721,11 +721,12 @@ async function sendNtfyNotification(customerName, readyDate, estimate) {
         // Still send even with default topic — user should change it to something private
     }
     try {
-        await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: `🎂 New Cheesecake Order! From: ${customerName} | Ready: ${readyDate} | Est: ${estimate}`
-    catch(e) {
+await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: `🎂 New Cheesecake Order! From: ${customerName} | Ready: ${readyDate} | Est: ${estimate}`
+        });
+    } catch(e) {
         // Fail silently — form still submits
         console.log('Ntfy notification failed:', e.message);
     }
