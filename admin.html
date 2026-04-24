@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buckeye Baker — Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --red: #a61c1c; --red-dark: #7f1414; --green: #2d5016; }
+        body { font-family: 'Lato', sans-serif; background: #f5f2ee; min-height: 100vh; padding: 1.5rem 1rem; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .card { background: #fff; border-radius: 1rem; box-shadow: 0 2px 20px rgba(0,0,0,0.08); padding: 1.5rem; margin-bottom: 1.25rem; }
+        .btn-red { background: var(--red); color: #fff; border: none; border-radius: 0.5rem; padding: 0.55rem 1.2rem; font-size: 0.9rem; cursor: pointer; font-family: 'Lato', sans-serif; transition: background 0.15s; }
+        .btn-red:hover { background: var(--red-dark); }
+        .btn-gray { background: #e5e7eb; color: #374151; border: none; border-radius: 0.5rem; padding: 0.55rem 1.2rem; font-size: 0.9rem; cursor: pointer; font-family: 'Lato', sans-serif; }
+        .btn-gray:hover { background: #d1d5db; }
+        .btn-green { background: var(--green); color: #fff; border: none; border-radius: 0.5rem; padding: 0.55rem 1.2rem; font-size: 0.9rem; cursor: pointer; font-family: 'Lato', sans-serif; }
+        input[type=date], input[type=text], input[type=password], input[type=number] {
+            border: 1.5px solid #d1d5db; border-radius: 0.5rem; padding: 0.5rem 0.75rem;
+            font-family: 'Lato', sans-serif; font-size: 0.9rem; width: 100%;
+        }
+        input:focus { border-color: var(--red); outline: none; box-shadow: 0 0 0 3px rgba(166,28,28,0.1); }
+        label { font-size: 0.85rem; font-weight: 600; color: #374151; display: block; margin-bottom: 0.3rem; }
+        .tag {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: #fdf2f2; border: 1px solid #fca5a5;
+            color: var(--red); font-size: 0.8rem; padding: 0.25rem 0.6rem;
+            border-radius: 99px; margin: 0.2rem;
+        }
+        .tag button { background: none; border: none; cursor: pointer; color: var(--red); font-size: 1rem; line-height: 1; padding: 0; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 0.4rem; }
+        .dot-green { background: #22c55e; }
+        .dot-red   { background: var(--red); }
+        #login-screen { max-width: 380px; margin: 4rem auto; }
+        #admin-panel  { max-width: 700px; margin: 0 auto; display: none; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #1a1a1a; margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f0ece6; }
+        .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: #fff; padding: 0.7rem 1.4rem; border-radius: 0.6rem; font-size: 0.9rem; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        .toast.show { opacity: 1; }
+        select { border: 1.5px solid #d1d5db; border-radius: 0.5rem; padding: 0.5rem 0.75rem; font-family: 'Lato', sans-serif; font-size: 0.9rem; width: 100%; }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+    <div class="card" style="text-align:center;">
+        <img src="logo.jpg" alt="Buckeye Baker" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;display:block;">
+        <h1 style="font-size:1.4rem; margin:0 0 0.25rem; color:#1a1a1a;">Buckeye Baker</h1>
+        <p style="color:#888; font-size:0.9rem; margin:0 0 1.5rem;">Admin Panel</p>
+        <div style="margin-bottom:1rem; text-align:left;">
+            <label>Admin PIN</label>
+            <input type="password" id="pin-input" placeholder="Enter your PIN" maxlength="20">
+        </div>
+        <button class="btn-red" style="width:100%;" onclick="login()">Unlock Admin Panel</button>
+        <p id="login-error" style="color:var(--red); font-size:0.85rem; margin-top:0.75rem; display:none;">Incorrect PIN. Try again.</p>
+        <p style="font-size:0.75rem; color:#bbb; margin-top:1rem;">
+            First time? Set your PIN in the config section of admin.html
+        </p>
+    </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem;">
+        <div>
+            <h1 style="font-size:1.5rem; color:#1a1a1a; margin:0;">🎂 Admin Panel</h1>
+            <p style="color:#888; font-size:0.85rem; margin:0.2rem 0 0;">Buckeye Baker of Grimes Co.</p>
+        </div>
+        <div>
+            <button class="btn-gray" onclick="logout()">Log Out</button>
+        </div>
+    </div>
+
+    <!-- Status -->
+    <div class="card" id="status-card">
+        <h3 class="section-title">Connection Status</h3>
+        <div id="status-msg" style="font-size:0.9rem; color:#555;">
+            Checking Airtable connection...
+        </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="card">
+        <h3 class="section-title">Settings</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+            <div>
+                <label>Airtable API Key</label>
+                <input type="text" id="cfg-api-key" placeholder="patXXXXXXXXXXXXXX">
+            </div>
+            <div>
+                <label>Airtable Base ID</label>
+                <input type="text" id="cfg-base-id" placeholder="appXXXXXXXXXXXXXX">
+            </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+            <div>
+                <label>Ntfy Topic (for phone alerts)</label>
+                <input type="text" id="cfg-ntfy" placeholder="buckeye-baker-orders-abc123">
+            </div>
+            <div>
+                <label>Max Orders Per Day</label>
+                <input type="number" id="cfg-max-orders" min="1" max="20" value="4">
+            </div>
+        </div>
+        <button class="btn-green" onclick="saveSettings()">💾 Save Settings</button>
+        <p style="font-size:0.78rem; color:#aaa; margin-top:0.5rem;">Settings saved in your browser. Copy the API key & Base ID values into index.html for the live form.</p>
+    </div>
+
+    <!-- Block a Single Date -->
+    <div class="card">
+        <h3 class="section-title">Block a Specific Date</h3>
+        <div style="display:flex; gap:0.75rem; align-items:flex-end; flex-wrap:wrap;">
+            <div style="flex:1; min-width:160px;">
+                <label>Date to Block</label>
+                <input type="date" id="block-single-date">
+            </div>
+            <div style="flex:2; min-width:180px;">
+                <label>Reason (optional)</label>
+                <input type="text" id="block-single-reason" placeholder="e.g., Out of town, Holiday">
+            </div>
+            <button class="btn-red" onclick="blockSingleDate()">Block Date</button>
+        </div>
+    </div>
+
+    <!-- Block a Date Range -->
+    <div class="card">
+        <h3 class="section-title">Block a Date Range</h3>
+        <div style="display:flex; gap:0.75rem; align-items:flex-end; flex-wrap:wrap;">
+            <div style="flex:1; min-width:140px;">
+                <label>Start Date</label>
+                <input type="date" id="block-range-start">
+            </div>
+            <div style="flex:1; min-width:140px;">
+                <label>End Date</label>
+                <input type="date" id="block-range-end">
+            </div>
+            <div style="flex:2; min-width:160px;">
+                <label>Reason (optional)</label>
+                <input type="text" id="block-range-reason" placeholder="e.g., Vacation week">
+            </div>
+            <button class="btn-red" onclick="blockDateRange()">Block Range</button>
+        </div>
+    </div>
+
+    <!-- Currently Blocked -->
+    <div class="card">
+        <h3 class="section-title">Currently Blocked Dates</h3>
+        <div id="blocked-list" style="min-height:2rem;">
+            <p style="color:#aaa; font-size:0.875rem;">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Upcoming Orders -->
+    <div class="card">
+        <h3 class="section-title">Upcoming Orders (from Airtable)</h3>
+        <p style="font-size:0.82rem; color:#888; margin: -0.5rem 0 0.75rem;">
+            Orders are logged here when customers submit the form — if you've connected FormSubmit → Airtable via Zapier/Make, or you manually add them.
+        </p>
+        <div id="orders-list" style="min-height:2rem;">
+            <p style="color:#aaa; font-size:0.875rem;">Loading...</p>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─────────────────────────────────────────────
+// CONFIG — change your PIN here
+// ─────────────────────────────────────────────
+const ADMIN_PIN = '1234';  // ← CHANGE THIS
+
+// Load saved settings from localStorage
+let cfg = {
+    apiKey:    localStorage.getItem('bb_api_key')    || '',
+    baseId:    localStorage.getItem('bb_base_id')    || '',
+    ntfyTopic: localStorage.getItem('bb_ntfy_topic') || 'buckeye-baker-orders',
+    maxOrders: parseInt(localStorage.getItem('bb_max_orders') || '4'),
+};
+
+function login() {
+    const pin = document.getElementById('pin-input').value;
+    if (pin === ADMIN_PIN) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-panel').style.display  = 'block';
+        loadSettings();
+        checkConnection();
+        loadBlocked();
+        loadOrders();
+    } else {
+        document.getElementById('login-error').style.display = 'block';
+    }
+}
+
+document.getElementById('pin-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') login();
+});
+
+function logout() {
+    document.getElementById('login-screen').style.display = 'block';
+    document.getElementById('admin-panel').style.display  = 'none';
+    document.getElementById('pin-input').value = '';
+}
+
+function loadSettings() {
+    document.getElementById('cfg-api-key').value    = cfg.apiKey;
+    document.getElementById('cfg-base-id').value    = cfg.baseId;
+    document.getElementById('cfg-ntfy').value       = cfg.ntfyTopic;
+    document.getElementById('cfg-max-orders').value = cfg.maxOrders;
+}
+
+function saveSettings() {
+    cfg.apiKey    = document.getElementById('cfg-api-key').value.trim();
+    cfg.baseId    = document.getElementById('cfg-base-id').value.trim();
+    cfg.ntfyTopic = document.getElementById('cfg-ntfy').value.trim();
+    cfg.maxOrders = parseInt(document.getElementById('cfg-max-orders').value) || 4;
+    localStorage.setItem('bb_api_key',    cfg.apiKey);
+    localStorage.setItem('bb_base_id',    cfg.baseId);
+    localStorage.setItem('bb_ntfy_topic', cfg.ntfyTopic);
+    localStorage.setItem('bb_max_orders', cfg.maxOrders);
+    showToast('✅ Settings saved! Remember to also update AIRTABLE_API_KEY and AIRTABLE_BASE_ID in index.html');
+    checkConnection();
+}
+
+async function checkConnection() {
+    const el = document.getElementById('status-msg');
+    if (!cfg.apiKey || !cfg.baseId) {
+        el.innerHTML = `<span class="status-dot dot-red"></span> Not configured. Add your Airtable API Key and Base ID above.`;
+        return;
+    }
+    try {
+        const r = await fetch(`https://api.airtable.com/v0/${cfg.baseId}/Blocked_Dates?maxRecords=1`,
+            { headers: { Authorization: `Bearer ${cfg.apiKey}` } });
+        if (r.ok) {
+            el.innerHTML = `<span class="status-dot dot-green"></span> Connected to Airtable ✓`;
+        } else {
+            const d = await r.json();
+            el.innerHTML = `<span class="status-dot dot-red"></span> Airtable error: ${d.error?.message || r.status}`;
+        }
+    } catch(e) {
+        el.innerHTML = `<span class="status-dot dot-red"></span> Connection failed: ${e.message}`;
+    }
+}
+
+async function loadBlocked() {
+    const el = document.getElementById('blocked-list');
+    if (!cfg.apiKey || !cfg.baseId) {
+        el.innerHTML = `<p style="color:#aaa;font-size:0.875rem;">Configure Airtable to see blocked dates.</p>`;
+        return;
+    }
+    try {
+        const r = await fetch(`https://api.airtable.com/v0/${cfg.baseId}/Blocked_Dates?maxRecords=100&sort[0][field]=Date&sort[0][direction]=asc`,
+            { headers: { Authorization: `Bearer ${cfg.apiKey}` } });
+        const data = await r.json();
+        if (!data.records || data.records.length === 0) {
+            el.innerHTML = `<p style="color:#aaa;font-size:0.875rem;">No blocked dates yet.</p>`;
+            return;
+        }
+        el.innerHTML = data.records.map(rec => {
+            const f = rec.fields;
+            const label = f.Type === 'range'
+                ? `📅 ${f.Start_Date} → ${f.End_Date} ${f.Reason ? `(${f.Reason})` : ''}`
+                : `📅 ${f.Date} ${f.Reason ? `(${f.Reason})` : ''}`;
+            return `<div class="tag">${label} <button onclick="unblock('${rec.id}')">×</button></div>`;
+        }).join('');
+    } catch(e) {
+        el.innerHTML = `<p style="color:var(--red);font-size:0.875rem;">Error loading: ${e.message}</p>`;
+    }
+}
+
+async function loadOrders() {
+    const el = document.getElementById('orders-list');
+    if (!cfg.apiKey || !cfg.baseId) {
+        el.innerHTML = `<p style="color:#aaa;font-size:0.875rem;">Configure Airtable to see orders.</p>`;
+        return;
+    }
+    try {
+        const today = new Date().toISOString().split('T')[0];
+        const r = await fetch(
+            `https://api.airtable.com/v0/${cfg.baseId}/Orders?maxRecords=50&sort[0][field]=Ready_Date&sort[0][direction]=asc&filterByFormula=IS_AFTER({Ready_Date},'${today}')`,
+            { headers: { Authorization: `Bearer ${cfg.apiKey}` } }
+        );
+        const data = await r.json();
+        if (!data.records || data.records.length === 0) {
+            el.innerHTML = `<p style="color:#aaa;font-size:0.875rem;">No upcoming orders found.</p>`;
+            return;
+        }
+
+        // Group by date
+        const byDate = {};
+        data.records.forEach(rec => {
+            const d = (rec.fields.Ready_Date || '').split('T')[0];
+            if (!byDate[d]) byDate[d] = [];
+            byDate[d].push(rec.fields);
+        });
+
+        el.innerHTML = Object.entries(byDate).map(([date, orders]) => {
+            const isFull = orders.length >= cfg.maxOrders;
+            return `<div style="margin-bottom:1rem;">
+                <div style="font-weight:700; font-size:0.9rem; color:#333; margin-bottom:0.35rem;">
+                    ${date} — <span style="color:${isFull ? 'var(--red)' : 'var(--green)'};">${orders.length}/${cfg.maxOrders} orders${isFull ? ' (FULL)' : ''}</span>
+                </div>
+                ${orders.map(o => `<div style="font-size:0.82rem;color:#555;margin-left:1rem;line-height:1.6;">
+                    • ${o.Customer_Name || 'Unknown'} — ${o.Customer_Email || ''} — ${o.Total_Estimated_Price || '?'}
+                </div>`).join('')}
+            </div>`;
+        }).join('');
+    } catch(e) {
+        el.innerHTML = `<p style="color:var(--red);font-size:0.875rem;">Error loading orders: ${e.message}</p>`;
+    }
+}
+
+async function blockSingleDate() {
+    const date   = document.getElementById('block-single-date').value;
+    const reason = document.getElementById('block-single-reason').value.trim();
+    if (!date) { alert('Please select a date.'); return; }
+    if (!cfg.apiKey || !cfg.baseId) { alert('Please configure Airtable first.'); return; }
+
+    await airtablePost('Blocked_Dates', { Date: date, Type: 'single', Reason: reason });
+    document.getElementById('block-single-date').value   = '';
+    document.getElementById('block-single-reason').value = '';
+    showToast(`✅ ${date} blocked!`);
+    loadBlocked();
+}
+
+async function blockDateRange() {
+    const start  = document.getElementById('block-range-start').value;
+    const end    = document.getElementById('block-range-end').value;
+    const reason = document.getElementById('block-range-reason').value.trim();
+    if (!start || !end) { alert('Please select start and end dates.'); return; }
+    if (end < start)    { alert('End date must be after start date.'); return; }
+    if (!cfg.apiKey || !cfg.baseId) { alert('Please configure Airtable first.'); return; }
+
+    await airtablePost('Blocked_Dates', { Start_Date: start, End_Date: end, Type: 'range', Reason: reason });
+    document.getElementById('block-range-start').value  = '';
+    document.getElementById('block-range-end').value    = '';
+    document.getElementById('block-range-reason').value = '';
+    showToast(`✅ ${start} → ${end} blocked!`);
+    loadBlocked();
+}
+
+async function unblock(recordId) {
+    if (!confirm('Remove this blocked date?')) return;
+    await fetch(`https://api.airtable.com/v0/${cfg.baseId}/Blocked_Dates/${recordId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${cfg.apiKey}` }
+    });
+    showToast('Removed!');
+    loadBlocked();
+}
+
+async function airtablePost(table, fields) {
+    const r = await fetch(`https://api.airtable.com/v0/${cfg.baseId}/${table}`, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${cfg.apiKey}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ fields })
+    });
+    if (!r.ok) {
+        const d = await r.json();
+        alert('Airtable error: ' + (d.error?.message || r.status));
+    }
+    return r;
+}
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+}
+</script>
+</body>
+</html>

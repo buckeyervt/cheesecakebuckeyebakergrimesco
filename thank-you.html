@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Submitted — Buckeye Baker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #fdfaf5;
+            background-image: radial-gradient(ellipse at 20% 0%, rgba(166,28,28,0.05) 0%, transparent 60%);
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 2rem 1rem;
+        }
+        h1, h2 { font-family: 'Playfair Display', serif; }
+        .card {
+            max-width: 480px; width: 100%;
+            background: #fff;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.10);
+            overflow: hidden;
+            text-align: center;
+        }
+        .card-top {
+            background: linear-gradient(135deg, #2d5016 0%, #1a3009 100%);
+            padding: 2rem;
+        }
+        .card-top img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(200,151,43,0.5); margin: 0 auto 1rem; display: block; }
+        .checkmark {
+            width: 64px; height: 64px;
+            background: rgba(34,197,94,0.15);
+            border: 2px solid rgba(34,197,94,0.4);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        .card-body { padding: 2rem; }
+        .step {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            text-align: left; margin-bottom: 0.75rem;
+            font-size: 0.9rem; color: #555;
+        }
+        .step-num {
+            background: #fdf2f2; color: #a61c1c;
+            border-radius: 50%; width: 26px; height: 26px; min-width: 26px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.8rem;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #a61c1c 0%, #7f1414 100%);
+            color: #fff; font-family: 'Playfair Display', serif;
+            font-size: 1rem; padding: 0.75rem 2rem;
+            border-radius: 0.65rem; text-decoration: none;
+            box-shadow: 0 3px 12px rgba(166,28,28,0.3);
+            transition: transform 0.15s;
+        }
+        .btn:hover { transform: translateY(-1px); }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="card-top">
+        <img src="logo.jpg" alt="Buckeye Baker of Grimes Co.">
+        <div class="checkmark">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </div>
+        <h1 style="color:#fff; font-size:1.5rem; margin:0 0 0.25rem;">Order Submitted!</h1>
+        <p style="color:rgba(255,255,255,0.75); font-size:0.9rem; margin:0;">Thank you for your order 🎂</p>
+    </div>
+    <div class="card-body">
+        <p style="color:#555; font-size:0.9rem; margin: 0 0 1.5rem; line-height:1.6;">
+            Your custom cheesecake request has been received! Here's what happens next:
+        </p>
+        <div>
+            <div class="step"><div class="step-num">1</div><div>You'll receive a <strong>confirmation email</strong> with your full order details shortly.</div></div>
+            <div class="step"><div class="step-num">2</div><div>We'll review your order and send a <strong>final price quote</strong> before we start baking.</div></div>
+            <div class="step"><div class="step-num">3</div><div>Once you approve the quote, we get to work on your cheesecake! 🧁</div></div>
+            <div class="step"><div class="step-num">4</div><div>Your cheesecake will be <strong>ready for pickup</strong> at your requested date and time.</div></div>
+        </div>
+        <div style="background:#fdf2f2; border-radius:0.65rem; padding:0.85rem 1rem; font-size:0.83rem; color:#7f1d1d; margin: 1.25rem 0;">
+            <strong>Questions?</strong> Reply to your confirmation email or reach out to <a href="mailto:buckeyebakergrimesco@gmail.com" style="color:#a61c1c;">buckeyebakergrimesco@gmail.com</a>
+        </div>
+        <a href="index.html" class="btn">Place Another Order</a>
+        <p style="font-size:0.75rem; color:#bbb; margin-top:1rem;">Licensed Cottage Baker in Texas — ID #6959</p>
+    </div>
+</div>
+</body>
+</html>
