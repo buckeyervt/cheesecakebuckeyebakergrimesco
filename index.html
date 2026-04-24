@@ -342,7 +342,7 @@
                 <input type="email" name="Customer_Email" id="Customer_Email" required placeholder="name@example.com">
             </div>
             <div class="field-group">
-                <label>Phone Number <span style="font-weight:300;color:#888;">(Optional)</span></label>
+                <label>Phone Number </label>
                 <input type="tel" name="Customer_Phone" id="Customer_Phone" placeholder="555-555-5555">
             </div>
             <div class="field-group">
@@ -717,12 +717,13 @@ function validateReadyDate() {
 // NTFY NOTIFICATION
 // ─────────────────────────────────────────────
 async function sendNtfyNotification(customerName, readyDate, estimate) {
-    if (!NTFY_TOPIC || NTFY_TOPIC === 'buckeye-baker-orders') {
+    if (!NTFY_TOPIC  {
         // Still send even with default topic — user should change it to something private
     }
     try {
         await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
             method: 'POST',
+            mode: 'no-cors',
             headers: {
                 'Title': '🎂 New Cheesecake Order!',
                 'Priority': 'high',
