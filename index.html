@@ -75,19 +75,16 @@
         }
         .section-sub { font-size: 0.83rem; color: var(--warm-gray); margin-bottom: 0.75rem; }
         .divider { border: none; border-top: 1px solid #f0ece6; margin: 1.5rem 0; }
-
         /* Availability banner */
         #availability-banner {
             display: none;
             margin-bottom: 1rem;
         }
-
         /* Price table */
         .price-table { background: #fafaf8; border-radius: 0.75rem; overflow: hidden; border: 1px solid #ede8e0; }
         .price-table li { display: flex; justify-content: space-between; padding: 0.45rem 1rem; font-size: 0.875rem; }
         .price-table li:not(:last-child) { border-bottom: 1px solid #f0ece6; }
         .price-tag { font-weight: 700; color: var(--red); }
-
         /* Flavor grid */
         .flavor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
         .flavor-grid .full { grid-column: 1 / -1; }
@@ -105,7 +102,6 @@
             color: var(--red); font-weight: 700;
         }
         .flavor-checkbox, .specialty-checkbox, .inclusion-checkbox { accent-color: var(--red); margin-top: 2px; flex-shrink: 0; }
-
         /* Sub-dropdowns */
         .sub-panel {
             margin-top: 0.4rem; margin-left: 1.25rem;
@@ -122,13 +118,11 @@
             border: 1px solid #d1d5db; border-radius: 0.375rem;
             font-size: 0.85rem; font-family: 'Lato', sans-serif;
         }
-
         /* Info boxes */
         .info-box { border-radius: 0.65rem; padding: 0.85rem 1rem; font-size: 0.875rem; margin-bottom: 0.75rem; }
         .info-red   { background: #fdf2f2; border: 1px solid #fca5a5; color: #7f1d1d; padding: 1.25rem 1.5rem; }
         .info-yellow { background: #fffbeb; border: 1px solid #fcd34d; color: #78350f; }
         .info-green { background: #f0fdf4; border: 1px solid #86efac; color: #14532d; }
-
         /* Contact fields */
         .field-group { margin-bottom: 1rem; }
         .field-group label { display: block; font-size: 0.85rem; font-weight: 600; color: #374151; margin-bottom: 0.35rem; }
@@ -142,10 +136,8 @@
             border-color: var(--red); outline: none;
             box-shadow: 0 0 0 3px rgba(166,28,28,0.1);
         }
-
         /* Date input — blocked dates shown red */
         input[type=datetime-local]::-webkit-calendar-picker-indicator { cursor: pointer; }
-
         /* Price summary */
         .price-summary {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
@@ -156,7 +148,6 @@
         .price-row { display: flex; justify-content: space-between; font-size: 0.875rem; color: rgba(255,255,255,0.7); padding: 0.2rem 0; }
         .price-row.total { border-top: 1px solid rgba(255,255,255,0.2); margin-top: 0.5rem; padding-top: 0.6rem; font-size: 1.05rem; color: #fff; font-weight: 700; }
         .price-row.total span:last-child { color: #f0c060; }
-
         /* Submit button */
         .submit-btn {
             display: block; width: 100%;
@@ -173,10 +164,8 @@
         .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(166,28,28,0.45); }
         .submit-btn:active { transform: translateY(0); }
         .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
         /* Date blocked overlay */
         .date-blocked-msg { color: var(--red); font-size: 0.82rem; margin-top: 0.35rem; display: none; }
-
         @media (max-width: 480px) {
             .flavor-grid { grid-template-columns: 1fr; }
             .flavor-grid .full { grid-column: 1; }
@@ -193,15 +182,12 @@
         <h2>Custom Cheesecake Order Form</h2>
         <div class="badge">🏡 Licensed Cottage Baker · Texas ID #6959</div>
     </div>
-
     <div class="card-body">
         <p class="text-sm text-center" style="color: #666; margin: 0 0 1.25rem;">
             All prices are an <strong>estimate</strong>. Final price confirmed via email before baking begins.
         </p>
-
         <!-- Availability banner (filled dynamically) -->
         <div id="availability-banner"></div>
-
         <form id="cheesecake-form" action="https://formsubmit.co/buckeyebakergrimesco@gmail.com" method="POST">
             <!-- FormSubmit hidden fields -->
             <input type="hidden" name="_honeypot" value="">
@@ -209,7 +195,6 @@
             <input type="hidden" name="_next" value="https://buckeyervt.github.io/cheesecakebuckeyebakergrimesco/thank-you.html">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="Total_Estimated_Price" id="Total_Estimated_Price" value="$0.00">
-
             <!-- ─── SECTION 1: Order Type Instructions ─── -->
             <div class="info-red" style="margin-bottom:1rem;">
                 <strong>Choose the type of cheesecake you'd like to order:</strong><br><br>
@@ -218,7 +203,6 @@
                 <strong>Classic with Inclusions</strong> — a base flavor with mix-ins added in<br>
                 <span style="font-size:0.82rem; opacity:0.8; display:block; margin-top:0.5rem;">You may select more than one from any section — order as many cheesecakes as you like!</span>
             </div>
-
             <!-- ─── SECTION 1: Prices ─── -->
             <div class="section-label">1. Single Flavor Prices</div>
             <ul class="price-table" style="list-style:none; padding:0; margin: 0 0 1.5rem;">
@@ -229,7 +213,6 @@
                 <li><span>10" x 3" <span style="color:#666;">(~16 servings)</span></span><span class="price-tag" id="display-price-10">$42</span></li>
             </ul>
             <hr class="divider">
-
             <div class="section-label">2. Single Flavor Cheesecake</div>
             <p class="section-sub">Select one or more flavors. Choose a size and crust type for each.</p>
             <div class="flavor-grid" id="flavor-section">
@@ -262,7 +245,6 @@
                 </div>
             </div>
             <hr class="divider">
-
             <!-- ─── SECTION 3: Specialty ─── -->
             <div class="section-label">3. Specialty Flavors</div>
             <p class="section-sub">Signature flavor combinations. Specialty selections add a size-based surcharge.</p>
@@ -293,7 +275,6 @@
                 </div>
             </div>
             <hr class="divider">
-
             <!-- ─── SECTION 4: Inclusions ─── -->
             <div class="section-label">4. Classic with Inclusions</div>
             <p class="section-sub">Each inclusion is its own cheesecake — choose a base flavor, size, and crust for each.</p>
@@ -320,7 +301,6 @@
                 </div>
             </div>
             <hr class="divider">
-
             <!-- ─── SECTION 5: Allergies ─── -->
             <div class="section-label">5. Allergies</div>
             <div class="info-yellow" style="margin-bottom:0.75rem;">
@@ -330,7 +310,6 @@
                 <textarea name="Allergies" rows="2" placeholder="List any allergies we should be aware of."></textarea>
             </div>
             <hr class="divider">
-
             <!-- ─── SECTION 6: Contact ─── -->
             <div class="section-label">6. Your Contact Information</div>
             <div class="field-group">
@@ -350,7 +329,6 @@
                 <textarea name="Customer_Comments" rows="3" placeholder="Any additional comments or special requests..."></textarea>
             </div>
             <hr class="divider">
-
             <!-- ─── SECTION 7: Ready Date ─── -->
             <div class="section-label">7. Requested Ready Date &amp; Time</div>
             <div class="info-yellow" style="margin-bottom:0.75rem;">
@@ -362,7 +340,6 @@
                 <p id="ready-date-error" class="date-blocked-msg">The requested date/time must be at least 36 hours from now.</p>
                 <p id="date-blocked-msg" class="date-blocked-msg">⛔ This date is unavailable or fully booked. Please choose another date.</p>
             </div>
-
             <!-- ─── Promo Code ─── -->
             <div style="margin-top:1.25rem;">
                 <div style="display:flex; gap:0.6rem; align-items:flex-end;">
@@ -374,7 +351,6 @@
                 </div>
                 <p id="promo-msg" style="font-size:0.82rem; margin-top:0.35rem; display:none;"></p>
             </div>
-
             <!-- ─── Price Summary ─── -->
             <div class="price-summary" style="margin-top:1rem;">
                 <h3>Order Estimate</h3>
@@ -385,14 +361,12 @@
                 <div class="price-row" id="promo-row" style="display:none; color:#86efac;"><span>🎉 Promo Discount (BUCKEYE77868)</span><span id="promo-discount-output">-$0.00</span></div>
                 <div class="price-row total"><span>TOTAL ESTIMATE</span><span id="total-price-output">$0.00</span></div>
             </div>
-
             <button type="submit" class="submit-btn" id="submit-btn">
                 🎂 Submit Custom Order
             </button>
         </form>
     </div>
 </div>
-
 <script>
 // ─────────────────────────────────────────────
 // CONFIGURATION — fill these in after Airtable setup
@@ -400,7 +374,6 @@
 const AIRTABLE_API_KEY  = 'patGoP9x5PhH0YTiY.1121b971e4e5875c94081feb8c12687a791fcfd910bc979c0b80e57e71c2c5fd';   // from admin panel setup
 const AIRTABLE_BASE_ID  = 'appIeVuiOyI9gQGAM';   // from admin panel setup
 const NTFY_TOPIC        = 'buckeye-baker-orders-grimes-tx-77868';     // change to something unique/private
-
 // ─────────────────────────────────────────────
 // DATA
 // ─────────────────────────────────────────────
@@ -421,7 +394,6 @@ const specialtySizeOptions = [
     { value: '10',label: '10" x 3" — $47 (~16 servings)', price: 47, promoPrice: 35, specialtyFee: 5, promoSpecialtyFee: 5, gfFee: 3, inclFee: 5 },
 ];
 const crustOptions = ['Graham Cracker', 'Chocolate Oreo', 'Golden Oreo', 'Biscoff', 'Gluten-Free Graham', 'Other'];
-
 // ─────────────────────────────────────────────
 // AVAILABILITY (fetched from Airtable)
 // ─────────────────────────────────────────────
@@ -429,7 +401,6 @@ let blockedDates   = [];  // array of "YYYY-MM-DD" strings
 let blockedRanges  = [];  // array of {start: "YYYY-MM-DD", end: "YYYY-MM-DD"}
 let fullDates      = {};  // { "YYYY-MM-DD": count }
 const MAX_PER_DAY  = 4;
-
 async function loadAvailability() {
     if (!AIRTABLE_API_KEY || AIRTABLE_API_KEY === 'YOUR_AIRTABLE_API_KEY') return;
     try {
@@ -448,7 +419,6 @@ async function loadAvailability() {
                 blockedDates.push(r.fields.Date);
             }
         });
-
         // Fetch order counts (for today + next 60 days)
         const today = new Date();
         const future = new Date(today); future.setDate(future.getDate() + 60);
@@ -467,13 +437,11 @@ async function loadAvailability() {
                 fullDates[d] = (fullDates[d] || 0) + 1;
             }
         });
-
         showAvailabilityBanner();
     } catch(e) {
         console.log('Availability check skipped:', e.message);
     }
 }
-
 function isDateBlocked(dateStr) {
     if (blockedDates.includes(dateStr)) return true;
     for (const r of blockedRanges) {
@@ -482,7 +450,6 @@ function isDateBlocked(dateStr) {
     if ((fullDates[dateStr] || 0) >= MAX_PER_DAY) return true;
     return false;
 }
-
 function showAvailabilityBanner() {
     // Show next 14 days that have limited availability
     const banner = document.getElementById('availability-banner');
@@ -502,7 +469,6 @@ function showAvailabilityBanner() {
         </div>`;
     }
 }
-
 // ─────────────────────────────────────────────
 // DROPDOWN BUILDERS
 // ─────────────────────────────────────────────
@@ -513,7 +479,6 @@ function buildSizeSelect(flavorId, isSpecialty) {
         ${opts.map(o => `<option value="${o.value}">${o.label}</option>`).join('')}
     </select>`;
 }
-
 function buildCrustSelect(flavorId) {
     return `<label>Crust Type</label>
     <select class="crust-select" id="crust-select-${flavorId}" name="Crust_${flavorId}">
@@ -524,7 +489,6 @@ function buildCrustSelect(flavorId) {
         <input type="text" name="Crust_Other_${flavorId}" placeholder="Describe your crust" style="width:100%;padding:0.35rem 0.5rem;border:1px solid #d1d5db;border-radius:0.375rem;font-size:0.85rem;">
     </div>`;
 }
-
 function buildBaseFlavorSelect(flavorId) {
     return `<label>Base Flavor</label>
     <select class="incl-base-flavor-select" id="base-flavor-select-${flavorId}" name="Base_For_${flavorId}">
@@ -537,13 +501,11 @@ function buildBaseFlavorSelect(flavorId) {
         <input type="text" name="Base_Other_${flavorId}" placeholder="Describe your base flavor" style="width:100%;padding:0.35rem 0.5rem;border:1px solid #d1d5db;border-radius:0.375rem;font-size:0.85rem;">
     </div>`;
 }
-
 function showSubPanels(flavorId, isSpecialty, isInclusion) {
     const sizeEl  = document.getElementById('size-for-' + flavorId);
     const crustEl = document.getElementById('crust-for-' + flavorId);
     if (sizeEl)  { sizeEl.innerHTML  = buildSizeSelect(flavorId, isSpecialty);  sizeEl.classList.remove('hidden'); }
     if (crustEl) { crustEl.innerHTML = buildCrustSelect(flavorId); crustEl.classList.remove('hidden'); }
-
     if (isInclusion) {
         const baseEl = document.getElementById('base-flavor-for-' + flavorId);
         if (baseEl) { baseEl.innerHTML = buildBaseFlavorSelect(flavorId); baseEl.classList.remove('hidden'); }
@@ -557,7 +519,6 @@ function showSubPanels(flavorId, isSpecialty, isInclusion) {
             });
         }
     }
-
     // Watch crust "Other"
     const crustSelect = crustEl ? crustEl.querySelector('.crust-select') : null;
     if (crustSelect) {
@@ -570,7 +531,6 @@ function showSubPanels(flavorId, isSpecialty, isInclusion) {
     const sizeSelect = sizeEl ? sizeEl.querySelector('.size-select') : null;
     if (sizeSelect) sizeSelect.addEventListener('change', updatePrice);
 }
-
 function hideSubPanels(flavorId, isInclusion) {
     ['size-for-', 'crust-for-'].forEach(prefix => {
         const el = document.getElementById(prefix + flavorId);
@@ -581,18 +541,15 @@ function hideSubPanels(flavorId, isInclusion) {
         if (baseEl) { baseEl.innerHTML = ''; baseEl.classList.add('hidden'); }
     }
 }
-
 // ─────────────────────────────────────────────
 // PROMO CODE
 // ─────────────────────────────────────────────
 const PROMO_CODE = 'BUCKEYE77868';
 let promoActive = false;
-
 function applyPromo() {
     const input = document.getElementById('promo-code-input');
     const msg   = document.getElementById('promo-msg');
     const code  = input.value.trim().toUpperCase();
-
     if (code === PROMO_CODE) {
         promoActive = true;
         msg.style.display = 'block';
@@ -614,7 +571,6 @@ function applyPromo() {
         updatePrice();
     }
 }
-
 function updatePriceTable() {
     // Update the visible price reference table when promo is active
     const prices = promoActive
@@ -625,17 +581,14 @@ function updatePriceTable() {
         if (el) el.textContent = price;
     });
 }
-
 // ─────────────────────────────────────────────
 // PRICE CALCULATOR
 // ─────────────────────────────────────────────
 function getOptions(isSpecialty) { return isSpecialty ? specialtySizeOptions : sizeOptions; }
-
 function updatePrice() {
     let baseTotal = 0, promoBaseTotal = 0;
     let specialtyTotal = 0, promoSpecialtyTotal = 0;
     let gfTotal = 0, inclTotal = 0;
-
     document.querySelectorAll('.flavor-checkbox:checked, .specialty-checkbox:checked').forEach(cb => {
         const id = cb.dataset.flavorId;
         const isSpec = cb.classList.contains('specialty-checkbox');
@@ -649,7 +602,6 @@ function updatePrice() {
         if (isSpec) { specialtyTotal += opt.specialtyFee; promoSpecialtyTotal += opt.promoSpecialtyFee; }
         if (crust && crust.value === 'Gluten-Free Graham') gfTotal += opt.gfFee;
     });
-
     document.querySelectorAll('.inclusion-checkbox:checked').forEach(cb => {
         const id = cb.dataset.flavorId;
         const sel = document.getElementById('size-select-' + id);
@@ -662,16 +614,13 @@ function updatePrice() {
         inclTotal += opt.inclFee;
         if (crust && crust.value === 'Gluten-Free Graham') gfTotal += opt.gfFee;
     });
-
     const fullTotal  = baseTotal + specialtyTotal + gfTotal + inclTotal;
     const promoTotal = promoBaseTotal + promoSpecialtyTotal + gfTotal + inclTotal;
     const discount   = fullTotal - promoTotal;
-
     document.getElementById('base-price-output').textContent         = `$${baseTotal.toFixed(2)}`;
     document.getElementById('specialty-surcharge-output').textContent = `$${specialtyTotal.toFixed(2)}`;
     document.getElementById('gf-surcharge-output').textContent       = `$${gfTotal.toFixed(2)}`;
     document.getElementById('inclusion-fee-output').textContent      = `$${inclTotal.toFixed(2)}`;
-
     if (promoActive && discount > 0) {
         document.getElementById('promo-row').style.display = 'flex';
         document.getElementById('promo-discount-output').textContent = `-$${discount.toFixed(2)}`;
@@ -683,7 +632,6 @@ function updatePrice() {
         document.getElementById('Total_Estimated_Price').value       = `$${fullTotal.toFixed(2)}`;
     }
 }
-
 // ─────────────────────────────────────────────
 // DATE VALIDATION
 // ─────────────────────────────────────────────
@@ -692,7 +640,6 @@ function validateReadyDate() {
     const errMin = document.getElementById('ready-date-error');
     const errBlock = document.getElementById('date-blocked-msg');
     if (!input.value) return false;
-
     const chosen = new Date(input.value);
     const minTime = new Date(Date.now() + 36 * 60 * 60 * 1000);
     if (chosen < minTime) {
@@ -700,27 +647,29 @@ function validateReadyDate() {
         errBlock.style.display = 'none';
         return false;
     }
-
     const dateStr = input.value.split('T')[0];
     if (isDateBlocked(dateStr)) {
         errBlock.style.display = 'block';
         errMin.style.display = 'none';
         return false;
     }
-
     errMin.style.display = 'none';
     errBlock.style.display = 'none';
     return true;
 }
-
 // ─────────────────────────────────────────────
 // PUSHOVER NOTIFICATION
 // ─────────────────────────────────────────────
 async function sendNtfyNotification(customerName, readyDate, estimate) {
     try {
+        // keepalive:true lets this request finish even though the page
+        // navigates away right after (FormSubmit.co redirect) — without it,
+        // the browser cancels the in-flight request before Pushover ever
+        // receives it.
         await fetch('https://api.pushover.net/1/messages.json', {
             method: 'POST',
             mode: 'no-cors',
+            keepalive: true,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `token=ayj1psve69vchrwb83trn7uioz58rc&user=u9u851qtjwjdw4xwih642oqpqkzksp&title=🎂 New Cheesecake Order!&message=From: ${customerName} | Ready: ${readyDate} | Est: ${estimate}`
         });
@@ -728,13 +677,11 @@ async function sendNtfyNotification(customerName, readyDate, estimate) {
         console.log('Pushover notification failed:', e.message);
     }
 }
-
 // ─────────────────────────────────────────────
 // INIT & EVENT LISTENERS
 // ─────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     loadAvailability();
-
     // Flavor checkboxes
     document.querySelectorAll('.flavor-checkbox').forEach(cb => {
         cb.addEventListener('change', () => {
@@ -753,7 +700,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePrice();
         });
     });
-
     // Specialty checkboxes
     document.querySelectorAll('.specialty-checkbox').forEach(cb => {
         cb.addEventListener('change', () => {
@@ -768,7 +714,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePrice();
         });
     });
-
     // Inclusion checkboxes
     document.querySelectorAll('.inclusion-checkbox').forEach(cb => {
         cb.addEventListener('change', () => {
@@ -783,95 +728,90 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePrice();
         });
     });
-
     // Promo code — apply on Enter key
     document.getElementById('promo-code-input').addEventListener('keydown', e => {
         if (e.key === 'Enter') { e.preventDefault(); applyPromo(); }
     });
-
     // Date validation on change
     document.getElementById('Ready_Date_Time').addEventListener('change', validateReadyDate);
-
     // Set minimum date (36h from now)
     const minDt = new Date(Date.now() + 36 * 60 * 60 * 1000);
     const pad = n => String(n).padStart(2, '0');
     document.getElementById('Ready_Date_Time').min =
         `${minDt.getFullYear()}-${pad(minDt.getMonth()+1)}-${pad(minDt.getDate())}T${pad(minDt.getHours())}:${pad(minDt.getMinutes())}`;
-
     // Form submission
     document.getElementById('cheesecake-form').addEventListener('submit', async (e) => {
+        // Always intercept first — we submit the form ourselves once the
+        // Pushover notification has actually been sent (see note below).
+        e.preventDefault();
+        const form = e.target;
         if (!validateReadyDate()) {
-            e.preventDefault();
             document.getElementById('Ready_Date_Time').scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
-
         const anyBase      = [...document.querySelectorAll('.flavor-checkbox')].some(c => c.checked);
         const anySpecialty = [...document.querySelectorAll('.specialty-checkbox')].some(c => c.checked);
         const anyInclusion = [...document.querySelectorAll('.inclusion-checkbox')].some(c => c.checked);
         if (!anyBase && !anySpecialty && !anyInclusion) {
-            e.preventDefault();
             alert('Please select at least one cheesecake flavor or inclusion.');
             document.getElementById('flavor-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
-
         // Validate size & crust for each checked item
         const allChecked = document.querySelectorAll('.flavor-checkbox:checked, .specialty-checkbox:checked');
         for (const cb of allChecked) {
             const id = cb.dataset.flavorId;
             const sizeEl = document.getElementById('size-select-' + id);
             if (sizeEl && !sizeEl.value) {
-                e.preventDefault();
                 alert(`Please select a size for: ${cb.value}`);
                 sizeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
             const crustEl = document.getElementById('crust-select-' + id);
             if (crustEl && !crustEl.value) {
-                e.preventDefault();
                 alert(`Please select a crust type for: ${cb.value}`);
                 crustEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
         }
-
         for (const cb of document.querySelectorAll('.inclusion-checkbox:checked')) {
             const id = cb.dataset.flavorId;
             const baseEl = document.getElementById('base-flavor-select-' + id);
             if (baseEl && !baseEl.value) {
-                e.preventDefault();
                 alert(`Please select a base flavor for inclusion: ${cb.value}`);
                 baseEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
             const sizeEl = document.getElementById('size-select-' + id);
             if (sizeEl && !sizeEl.value) {
-                e.preventDefault();
                 alert(`Please select a size for inclusion: ${cb.value}`);
                 sizeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
             const crustEl = document.getElementById('crust-select-' + id);
             if (crustEl && !crustEl.value) {
-                e.preventDefault();
                 alert(`Please select a crust type for inclusion: ${cb.value}`);
                 crustEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
         }
-
         // Build subject line
         const name  = document.getElementById('Customer_Name').value.trim();
         const rdv   = document.getElementById('Ready_Date_Time').value;
         const fmtDate = rdv ? new Date(rdv).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
         document.getElementById('email-subject').value = `🎂 New Cheesecake Order: ${name} — Ready ${fmtDate}`;
-
-        // Send Ntfy notification (fire and forget — don't await or it blocks submit)
+        // Send the Pushover notification and WAIT for it before letting the
+        // page navigate to FormSubmit.co — previously this was fired without
+        // awaiting, so the browser navigated away and killed the request
+        // before Pushover ever got it. Also disable the button so the
+        // customer can't double-submit while we wait.
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
         const estimate = document.getElementById('total-price-output').textContent;
-        sendNtfyNotification(name, fmtDate, estimate);
-
-        // Let form submit normally to FormSubmit.co
+        await sendNtfyNotification(name, fmtDate, estimate);
+        // Now submit the form for real (this navigates to FormSubmit.co)
+        form.submit();
     });
 });
 </script>
